@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../entities/user');
 var userService = require('../services/user_service');
 var JsonParserService = require('../services/json_parse_service');
 
@@ -25,9 +26,9 @@ router.get('/:id', async function(req, res, next) {
 
 // POST create a user
 router.post('/', async function(req, res, next) {
-  const { name, phone, obs } = req.body;
+  const user = new User(req.body);
   try {
-    await userService.create(name, phone, obs);
+    await userService.create(user);
     res.send({ success: true, message: 'User created successfully.' });
   } catch (err) {
     next(err);
@@ -36,9 +37,11 @@ router.post('/', async function(req, res, next) {
 
 // PUT update a user
 router.put('/:id', async function(req, res, next) {
-  const { name, phone, obs } = req.body;
+  const user = new User(req.body);
+  user.id = req.params.id
+  
   try {
-    await userService.update(req.params.id, name, phone, obs);
+    await userService.update(user);
     res.send({ success: true, message: 'User updated successfully.' });
   } catch (err) {
     next(err);

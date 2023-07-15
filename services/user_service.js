@@ -28,7 +28,7 @@ const find_by_id = async (id) => {
   const sql = "SELECT * FROM users WHERE id = ?";
 
   const results = await db.query(sql, id);
-  const users = results.map(result => new User(result.id, result.name, result.phone, result.obs));
+  const users = results.map(result => new User(result));
   return users[0]; // Retorna o primeiro usuário (deve ser único)
 };
 
@@ -36,7 +36,7 @@ const all = async () => {
   const sql = "SELECT * FROM users";
 
   const results = await db.query(sql);
-  const users = results.map(result => new User(result.id, result.name, result.phone, result.obs));
+  const users = results.map(result => new User(result));
   return users;
 };
 
