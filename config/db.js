@@ -13,7 +13,10 @@ const connection = mysql.createConnection({
   user: MYSQL_USER,
   password: MYSQL_PASS,
   database: MYSQL_DATABASE,
-  ssl: 'preferred'
+  ssl: {
+    rejectUnauthorized: false,
+    encrypt: true
+  }
 });
 
 // Promisify para Node.js async/await.
