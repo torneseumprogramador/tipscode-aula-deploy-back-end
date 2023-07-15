@@ -231,6 +231,8 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+env.sh
+
 # Windows shortcuts
 *.lnk
 
